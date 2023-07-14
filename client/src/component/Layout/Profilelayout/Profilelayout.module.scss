@@ -1,0 +1,29 @@
+
+
+.container{
+    background-color: rgb(235, 235, 240);
+
+}
+
+.wrapper-content {
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 70px;
+}
+
+
+
+.wrapper-link{
+    color: #9b9b9b; 
+    display: flex;
+    padding-top: 15px;
+}
+.linkhome {
+    margin-left: 20px;
+    color: #9b9b9b;
+    margin-right: 3px;
+    &:hover {
+        text-decoration: underline;
+        color: black;
+    }
+}

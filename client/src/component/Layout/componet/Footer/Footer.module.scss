@@ -1,0 +1,41 @@
+.container-footer{
+    background-color: white;
+    padding: 60px 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    overflow: hidden;
+    img{
+        height: 100px;
+    }
+}
+
+.infor-creater{
+    display: flex;
+    align-items: center;
+    p{
+        margin: 0;
+        padding: 0;
+        margin-left: 5px;
+    }
+}
+
+.social{
+    display: flex;
+    flex-direction: column;
+   
+    img{
+        width: 30px;
+        height: 30px;
+    }
+
+    a{
+        display: flex;
+        align-items: center;
+    }
+}
+
+.gmail{
+    display: flex;
+    align-items: center;
+}

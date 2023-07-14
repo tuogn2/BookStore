@@ -1,0 +1,39 @@
+.containerbutton {
+    background-color: rgb(235, 235, 240);
+    color: #9b9b9b;
+    width: 250px;
+    height: 38px;
+    padding: 7px 18px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &:hover {
+        background-color: rgb(208, 208, 213);
+        color: rgb(59, 55, 55);
+
+    }
+}
+
+.wrappericon {
+    color: rgb(59, 55, 55);
+    background-color: rgb(150, 150, 150);
+
+    &:hover {
+        background-color: rgb(150, 150, 150);
+    }
+}
+
+.containericon {
+    margin-right: 10px;
+    width: 40px;
+
+    &:nth-child(n) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+

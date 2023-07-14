@@ -1,0 +1,21 @@
+.containet-header {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    // background-color: aqua;
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 15%;
+    height: 60px;
+    margin-right: 40px;
+    img {
+        height: 60px;
+
+    }
+}
+
+

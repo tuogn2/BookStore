@@ -1,0 +1,26 @@
+.wrap-pagination {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    margin: 0 4px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: 0.5s ease-out;
+    cursor: pointer;
+    &:hover {
+        background-color: rgb(209, 209, 105);
+    }
+}
+
+.checked {
+    background-color: #9cc9f0;
+    cursor: default;
+    &:hover {
+        background-color: #9cc9f0;
+    }
+}

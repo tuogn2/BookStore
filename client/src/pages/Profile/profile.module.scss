@@ -1,0 +1,150 @@
+.container-profile {
+    width: 100%;
+    position: relative;
+    margin-left: 10px;
+}
+
+.wraper-content {
+    position: absolute;
+    width: 99%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.title {
+    height: 54.5px;
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: 30px;
+}
+
+.infro-user {
+    margin: 10px;
+    width: 60%;
+    border-right: 1px solid rgb(144, 143, 143);
+}
+
+
+.infor {
+    margin-bottom: 5px;
+}
+
+.wrapper-avatar {
+    border: 4px solid #c2e1ff;
+    margin-right: 15px;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.name-nickname {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+
+.name {
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    flex: 1;
+    margin-right: 30px;
+}
+
+.birđay {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+
+.sex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+
+}
+
+.radio-gender {
+    display: flex;
+
+    span {
+        margin-right: 30px;
+        margin-left: 5px;
+    }
+}
+
+.container-btn {
+    width: 100%;
+    display: flex;
+    margin: 30px 0;
+    padding-bottom: 20px;
+    justify-content: center;
+}
+
+
+
+.connect {
+    margin: 10px;
+    font-size: 16px;
+    flex: 1;
+}
+
+
+.btn {
+    width: 80px;
+    font-size: 14px;
+    text-align: center;
+    padding: 5px 0 5px 0;
+    color: #7fbaf6;
+    border-radius: 10px;
+    border: 1px solid #7fbaf6;
+}
+
+.wrap-update {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+
+
+@media only screen and (max-width: 794px) {
+    .title{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1110px) {
+
+    .connect {
+        display: none;
+    }
+
+    .infro-user {
+        width: 100%;
+        border: none;
+        min-width: 480px;
+    }
+
+}

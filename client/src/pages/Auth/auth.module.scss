@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@100;200&display=swap');
+
+.container-loginfrom {
+    width: 100%;
+    height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.wraperform {
+    display: flex;
+    width: 700px;
+    height: 450px;
+    box-shadow: 1px 1px 13px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.img {
+    height: 450px;
+    width: auto;
+
+}
+
+.formlogin {
+    width: auto;
+    flex: 1;
+}
+
+.title {
+    font-family: 'Libre Baskerville', serif;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    width: 100%;
+    font-size: 60px;
+    font-weight: 600;
+    color: #1385f7;
+    margin: 20px 0 10px 0;
+}
+
+.input {
+    margin: 20px 0;
+    // text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    label {
+        height: 10px;
+        padding: 5px 2px 25px;
+        border-radius: 5px;
+        background-color: #1385f7;
+    }
+
+    input {
+        width: calc(70% - 6px);
+        outline: none;
+
+        &:focus {
+            background-color: rgba(255, 166, 0, 0.744);
+        }
+
+    }
+}
+
+.content {
+    font-size: 10px;
+    text-align: center;
+    color: rgba(255, 166, 0, 0.744);
+    margin-bottom: 30px;
+}
+
+.more-options {
+    display: flex;
+    margin-left: 52px;
+    font-size: 13px;
+
+}
+
+.signin {
+    margin-left: 15px;
+    color: orange;
+    cursor: pointer;
+    &:hover {
+        color: #1385f7;
+
+    }
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: center;
+
+    div {
+        width: 100px;
+    }
+}
+
+.arowlogin{
+    width: 100%;
+    color: orange;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-right: 5px;
+    text-align: right;
+    &:hover {
+        color: #1385f7;
+
+    }
+}
+
+
+.notifi{
+    position: absolute;
+    color: red;
+    bottom: -32px;
+    left: 55px;
+    font-size: 10px;
+}
+
+
+@media only screen and (max-width: 724px) {
+   
+    .img{
+        display: none;
+    }
+    
+}
