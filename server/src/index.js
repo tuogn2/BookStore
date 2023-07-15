@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //   origin: 'https://main--whimsical-douhua-7f4fcd.netlify.app',
 //   credentials: true
 // }));
-app.options('*', cors());
+// app.options('*', cors());
 
 app.use(cookieParser('dochituong'))
 app.use(express.static(path.join(__dirname, 'public')));
