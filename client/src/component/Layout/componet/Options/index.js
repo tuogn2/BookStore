@@ -83,9 +83,9 @@ function Options() {
         }
         if (!cookie(document.cookie)) {
             console.log('2')
+            console.log(document.cookie)
             return navigate('/account');
         }
-        console.log('hi')
         navigate('/store') 
     }
     return (
