@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 import { URL } from '../../../../api';
 import { useDispatch } from 'react-redux';
 import inforSlice from '../../../../pages/Auth/inforSlice';
-import { cookie } from '~/regex';
 import {  infouser } from '~/reudx/selectors';
 
 
@@ -34,9 +33,9 @@ function Options() {
         if (!localStorage.id) {
             return;
         }
-        if (!cookie(document.cookie)) {
-            return;
-        }
+        // if (!cookie(document.cookie)) {
+        //     return;
+        // }
         if (Object.keys(infor.infor).length === 0) {
             fetch(`${URL}/user/user/${localStorage.id}`)
                 .then(res => {
@@ -78,14 +77,11 @@ function Options() {
     const navigate = useNavigate()
     const handlerStore =()=>{
         if (!localStorage.id) {
-            console.log('1')
             return navigate('/account');
         }
-        if (!cookie(document.cookie)) {
-            console.log('2')
-            console.log(document.cookie)
-            return navigate('/account');
-        }
+        // if (!cookie(document.cookie)) {
+        //     return navigate('/account');
+        // }
         navigate('/store') 
     }
     return (

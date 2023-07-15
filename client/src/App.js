@@ -10,7 +10,7 @@ import Storeproduct from './pages/Storeproduct';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getproducts } from './pages/Detailproduct/productsSlice';
-import { cookie } from './regex';
+// import { cookie } from './regex';
 import { getYourStore } from './pages/Storeproduct/StoreSlice';
 const Profile = React.lazy(() => import('./pages/Profile'))
 function App() {
@@ -23,9 +23,9 @@ function App() {
     if (!localStorage.id) {
       return;
     }
-    if (!cookie(document.cookie)) {
-      return;
-    }
+    // if (!cookie(document.cookie)) {
+    //   return;
+    // }
     dispatch(getYourStore())
   },[dispatch])  
   return (

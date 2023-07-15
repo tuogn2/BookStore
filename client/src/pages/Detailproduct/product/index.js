@@ -13,7 +13,7 @@ import { URL_IMG } from "~/api";
 import { useDispatch, useSelector } from "react-redux";
 import { inforproducts, infouser } from "~/reudx/selectors";
 import { addProduct } from "~/pages/Storeproduct/StoreSlice";
-import { cookie } from "~/regex";
+// import { cookie } from "~/regex";
 const cx = classNames.bind(style)
 function Product() {
     const dispath = useDispatch()
@@ -50,9 +50,9 @@ function Product() {
         if (!localStorage.id) {
             return navigate('/account');
         }
-        if (!cookie(document.cookie)) {
-            return navigate('/account');
-        }
+        // if (!cookie(document.cookie)) {
+        //     return navigate('/account');
+        // }
         dispath(addProduct({
             userid: inforuser.infor._id,
             productID: id,
