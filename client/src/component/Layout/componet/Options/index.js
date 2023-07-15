@@ -78,9 +78,11 @@ function Options() {
     const navigate = useNavigate()
     const handlerStore =()=>{
         if (!localStorage.id) {
+            console.log('1')
             return navigate('/account');
         }
         if (!cookie(document.cookie)) {
+            console.log('2')
             return navigate('/account');
         }
         console.log('hi')
