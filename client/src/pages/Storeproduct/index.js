@@ -73,7 +73,7 @@ function Storeproduct() {
     let finalTotal = total.toLocaleString("vi-VN")
 
     const handlerDeleteAll = () => {
-        fetch(`http://localhost:5000/api/store/deletecart`, {
+        fetch(`${URL}/store/deletecart`, {
             method: 'DELETE',
             credentials: 'include',
             headers: {
