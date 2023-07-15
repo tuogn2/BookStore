@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,8 +30,8 @@ function Storeproduct() {
     }
     const inforStore = useSelector(inforstore)
     const inforProducts = useSelector(inforproducts)
-    let inforcheck = []
     useEffect(() => {
+        let inforcheck = []
         inforProducts.map((product) => {
             if (inforStore[0]) {
                 for (let k = 0; k < inforStore[0].products.length; k++) {
@@ -50,9 +50,9 @@ function Storeproduct() {
         if (inforcheck.length > 0) {
             dispatch(CartSlice.actions.getCart(inforcheck))
         }
-        inforcheck = [];
-    }, [inforStore, inforProducts])
-
+        // inforcheck = [];
+    }, [inforStore, inforProducts,dispatch]) 
+  
 
     const arrGetCart = useSelector(inforCart)
     let total = 0;

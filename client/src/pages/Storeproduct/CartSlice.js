@@ -1,6 +1,5 @@
-import { URL } from "~/api";
 
-const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
+const { createSlice } = require("@reduxjs/toolkit");
 
 
 const CartSlice = createSlice({
@@ -62,6 +61,7 @@ const CartSlice = createSlice({
                 }
                 return item
             })
+            return newState
         },
         MinusQuantity: (state, action) => {
             const newState = state.map((item) => {
@@ -70,6 +70,7 @@ const CartSlice = createSlice({
                 }
                 return item
             })
+            return newState
         }
     }
 })

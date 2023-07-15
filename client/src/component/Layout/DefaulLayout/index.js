@@ -1,4 +1,4 @@
-import Footer from "../componet/Footer";
+
 import Header from "../componet/Header";
 
 function DefaulLayout({ children }) {
