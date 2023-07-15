@@ -16,7 +16,7 @@ function Anotherproduct() {
         if(!products[0]){
             dispatch(getproducts())
         }
-    },[products])
+    },[products,dispatch])
     return ( <div className={cx('wrap-miniproducts')}>
         {products.map((product,index)=>{
             return <Miniproduct key={index} product={product} />
