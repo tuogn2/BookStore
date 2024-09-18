@@ -30,7 +30,7 @@ function Header() {
             </div>
             <Search />
             <Options />
-        </div>);
+        </div>);    
 }
 
 export default memo(Header);

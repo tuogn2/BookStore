@@ -1,45 +1,57 @@
 import { useState } from "react";
 import Miniproduct from "../Miniproduct";
+import { Box,  Pagination as MUIPagination } from "@mui/material";
 
-
-import style from './pagination.module.scss'
-import classNames from "classnames/bind";
-const cx = classNames.bind(style)
 function Pagination({ products }) {
-    const totalproduct = products.length // tổng số sách
-    const perpage = 12 // mỗi trang có bao nhiêu sách
-    const quantity = Math.ceil(totalproduct / perpage) // cóa bao nhiêu trang
-    const [fillters, setfillters] = useState(1) // hiện đang ở trang nào
-    var start = (fillters-1)*perpage // đắt đầu trong mãng 
-    var end = fillters*perpage // kết thúc mãng muốn lấy 
-    const Productpagination = ()=>{
-        var Check =[]
-        //phai thêm điều kiện i < tổng số sách vì nếu quá thì chọc vào mãng ko được
-        for (let i =start ;i < end && i < totalproduct;i++) {
-           Check.push( <Miniproduct key={i} product={products[i]} />)
-        }
-        return Check;
-    } 
-    
-    return (
-        <>
-           
-            <Productpagination/>
-            <div className={cx('wrap-pagination')}>
-                <button className="btn btn-primary" disabled={fillters===1 ?true:false} onClick={()=>setfillters(fillters-1) }>prev</button>
-                {Array.from({ length: quantity }, (_, index) => {
-                    var bool = fillters === index+1?true:false
-                    var cssButton = cx({
-                        button: true,
-                        checked:bool
-                    })
+  const totalProduct = products.length;
+  const perPage = 12;
+  const quantity = Math.ceil(totalProduct / perPage);
+  const [currentPage, setCurrentPage] = useState(1);
 
-                    return <div key={index} onClick={()=>setfillters(index + 1)}  className={cssButton}>{index + 1}</div>
-                }
-                )}
-                <button className="btn btn-primary" disabled={fillters===6 ?true:false} onClick={()=>setfillters(fillters+1) }>next</button>
-            </div>
-        </>);
+  const start = (currentPage - 1) * perPage;
+  const end = currentPage * perPage;
+
+  const ProductPagination = () => {
+    return products
+      .slice(start, end)
+      .map((product, index) => <Miniproduct key={index} product={product} />);
+  };
+
+  return (
+    <>
+      <div  style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)', // Create 4 equal-width columns
+            gap: 2, // Gap between grid items
+            padding: 3,
+            borderRadius: 2,
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for a better look
+            width: '100%',
+            boxSizing: 'border-box',
+          }}>
+        <ProductPagination />
+      </div>
+      <div>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            mt: 2,
+          }}
+        >
+          <MUIPagination
+            count={quantity}
+            page={currentPage}
+            onChange={(event, value) => setCurrentPage(value)}
+            siblingCount={1}
+            boundaryCount={1}
+            color="primary"
+          />
+        </Box>
+      </div>
+    </>
+  );
 }
 
 export default Pagination;

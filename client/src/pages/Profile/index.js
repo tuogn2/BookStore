@@ -1,203 +1,193 @@
-import { useState } from 'react';
-import style from './profile.module.scss'
-import classNames from 'classnames/bind';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
-
-import avt from '~/Images/avt.png'
-import { infouser } from '~/reudx/selectors';
-import { useEffect } from 'react';
+import { TextField, Grid, Button, Typography, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Select, MenuItem, InputLabel, Avatar, Paper } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 
-import goolge from '~/Images/google.png'
-import facebook from '~/Images/face.png'
-const cx = classNames.bind(style)
-function Profile() {
-    const infor = useSelector(infouser)
-    const [user, setuser] = useState({})
-    useEffect(() => {
-        setuser(infor.infor)
-    }, [infor.infor])
-    return (
-        <div className={cx('container-profile')}>
-            <div className={cx('title')}>
-                <p>
-                    Thông tin cá nhân
-                </p>
-            </div>
-            <div className={`container ${cx('wraper-content')}`}>
-                <div className={cx('infro-user')}>
-                    <div className={cx('infor')}>
-                        Thông tin cá nhân
-                    </div>
-                    <div style={{ display: 'flex' }}>
-                        <div className={cx('wrapper-avatar')}> 
-                            <img src={avt} alt='avt'  />
-                        </div>
-                        <div className={cx('name-nickname')}>
-                            <div className={cx('name')}>
-                                <div style={{ marginRight: 10, width: 110 }}>
-                                    ID
-                                </div>
-                                <input className={cx('input')} type='text' value={user._id ? user._id : 'No ID'} disabled />
-                            </div>
-                            <div className={cx('name')}>
-                                <div style={{ marginRight: 10, width: 110 }}>
-                                    Họ & Tên
-                                </div>
-                                <input className={cx('input')} type='text' value={user.name ? user.name : 'No name'} disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div className={cx('birđay')}>
-                        <div style={{ marginRight: 50, width: 80 }}>
-                            Ngày Sinh
-                        </div>
-                        <select>
-                            <option>Ngày</option>
-                            {(() => {
-                                let day = [];
-                                for (let index = 1; index < 31; index++) {
-                                    day.push(<option key={index}>{index}</option>);
-                                }
-                                return day;
-                            })()}
-                        </select>
-                        <select>
-                            <option>Tháng</option>
-                            {(() => {
-                                let month = [];
-                                for (let index = 1; index < 12; index++) {
-                                    month.push(<option key={index}>{index}</option>);
-                                }
-                                return month;
-                            })()}
-                        </select>
-                        <select>
-                            <option>Năm</option>
-                            {(() => {
-                                let month = [];
-                                for (let index = 2023; index >= 1990; index--) {
-                                    month.push(<option key={index}>{index}</option>);
-                                }
-                                return month;
-                            })()}
-                        </select>
+import avt from '~/Images/avtstore.jpg';
+import { infouser } from '~/reudx/selectors';
+import google from '~/Images/google.png';
+import facebook from '~/Images/face.png';
 
-                    </div>
-                    <div className={cx('sex')}>
-                        <div style={{ marginRight: 50, width: 80 }}>
-                            Giới tính
-                        </div>
-                        <div className={cx('radio-gender')}>
-                            <div>
-                                <input type='radio'defaultChecked name='gender' value={`male`} />
-                                <span>
-                                    Nam
-                                </span>
-                            </div>
-                            <div>
-                                <input type='radio' name='gender' value={`female`} />
-                                <span>
-                                    Nữ
-                                </span>
-                            </div>
-                            <div>
-                                <input type='radio' name='gender' value={`orther`} />
-                                <span>
-                                    Khác
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={cx('sex')}>
-                        <div style={{ marginRight: 50, width: 80, marginBottom: 10 }}>
-                            Quốc tịch
-                        </div>
-                        <div className={cx('radio-gender')}>
-                            <input value={`Viet Nam`} disabled />
-                        </div>
-                    </div>
-                    <div className={cx('container-btn')}>
-                        <div className='btn btn-primary disabled' >
-                            Lưu thay đổi
-                        </div>
-                    </div>
-                </div>
-                
-                <div className={cx('connect')}>
-                    <div className={cx('infor')}>
-                        Số điện thoại và email
-                    </div>
-                    <div className={cx('wrap-update')}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <div style={{ marginRight: 10 }}>
-                                <FontAwesomeIcon icon={faPhone} />
-                            </div>
-                            <div>
-                                <div>
-                                    Số điện thoại
-                                </div>
-                                <div>
-                                    0976474170
-                                </div>
-                            </div>
-                        </div>
-                        <div className={cx('btn')} disabled>
-                            Cập nhập
-                        </div>
-                    </div>
-                    <div className={cx('wrap-update')}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <div style={{ marginRight: 10 }}>
-                                <FontAwesomeIcon icon={faEnvelope} />
-                            </div>
-                            <div>
-                                <div>
-                                    Địa chỉ email
-                                </div>
-                                <div>
-                                    dctuong021203@gmail.com
-                                </div>
-                            </div>
-                        </div>
-                        <div className={cx('btn')} disabled>
-                            Cập nhập
-                        </div>
-                    </div>
-                    <div className={cx('infor')}>
-                        Liên kết mạng xã hội
-                    </div>
-                    <div className={cx('wrap-update')}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <div style={{ marginRight: 10 }}>
-                                <img style={{ width: 20 }} alt='face' src={facebook} />
-                            </div>
-                            <div>
-                                Facebook
-                            </div>
-                        </div>
-                        <div className={cx('btn')} disabled>
-                            Cập nhập
-                        </div>
-                    </div>
-                    <div className={cx('wrap-update')}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <div style={{ marginRight: 10 }}>
-                                <img style={{ width: 20 }} alt='goolge' src={goolge} />
-                            </div>
-                            <div>
-                                Goolge
-                            </div>
-                        </div>
-                        <div className={cx('btn')} disabled>
-                            Cập nhập
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>);
+function Profile() {
+  const infor = useSelector(infouser);
+  const [user, setuser] = useState({});
+
+  useEffect(() => {
+    setuser(infor.infor);
+  }, [infor.infor]);
+
+  return (
+    <Grid container spacing={3} sx={{ padding: { xs: '10px', }, display: 'flex' }}>
+      
+      {/* Personal Info Section */}
+      <Grid item xs={12} md={8}>
+        <Paper elevation={3} sx={{ padding: '20px', borderRadius: '10px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div>
+            <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+              Thông tin cá nhân
+            </Typography>
+            <Grid container spacing={2} sx={{ alignItems: 'center', marginBottom: '20px' }}>
+              <Grid item xs={4}>
+                <Avatar src={avt} alt="avt" sx={{ width: 120, height: 120, margin: 'auto' }} />
+              </Grid>
+              <Grid item xs={8}>
+                <TextField
+                  label="ID"
+                  value={user._id ? user._id : 'No ID'}
+                  fullWidth
+                  disabled
+                  margin="normal"
+                  sx={{ backgroundColor: '#f9f9f9', borderRadius: '5px' }}
+                />
+                <TextField
+                  label="Họ & Tên"
+                  value={user.name ? user.name : 'No name'}
+                  fullWidth
+                  disabled
+                  margin="normal"
+                  sx={{ backgroundColor: '#f9f9f9', borderRadius: '5px' }}
+                />
+              </Grid>
+            </Grid>
+          </div>
+
+          <div>
+            {/* Birthday Section */}
+            <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+              <Grid item xs={4}>
+                <FormControl fullWidth>
+                  <InputLabel>Ngày</InputLabel>
+                  <Select defaultValue="">
+                    {[...Array(30)].map((_, index) => (
+                      <MenuItem key={index + 1} value={index + 1}>
+                        {index + 1}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={4}>
+                <FormControl fullWidth>
+                  <InputLabel>Tháng</InputLabel>
+                  <Select defaultValue="">
+                    {[...Array(12)].map((_, index) => (
+                      <MenuItem key={index + 1} value={index + 1}>
+                        {index + 1}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={4}>
+                <FormControl fullWidth>
+                  <InputLabel>Năm</InputLabel>
+                  <Select defaultValue="">
+                    {[...Array(34)].map((_, index) => (
+                      <MenuItem key={2023 - index} value={2023 - index}>
+                        {2023 - index}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
+
+            {/* Gender Section */}
+            <FormControl component="fieldset" sx={{ marginTop: '20px' }}>
+              <FormLabel component="legend" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+                Giới tính
+              </FormLabel>
+              <RadioGroup row defaultValue="male" name="gender">
+                <FormControlLabel value="male" control={<Radio />} label="Nam" />
+                <FormControlLabel value="female" control={<Radio />} label="Nữ" />
+                <FormControlLabel value="other" control={<Radio />} label="Khác" />
+              </RadioGroup>
+            </FormControl>
+
+            {/* Nationality Section */}
+            <TextField
+              label="Quốc tịch"
+              value="Viet Nam"
+              fullWidth
+              disabled
+              margin="normal"
+              sx={{ backgroundColor: '#f9f9f9', marginTop: '20px', borderRadius: '5px' }}
+            />
+
+            <Button variant="contained" color="primary" fullWidth disabled sx={{ marginTop: '20px', padding: '10px' }}>
+              Lưu thay đổi
+            </Button>
+          </div>
+        </Paper>
+      </Grid>
+
+      {/* Contact Info Section */}
+      <Grid item xs={12} md={4}>
+        <Paper elevation={3} sx={{ padding: '20px', borderRadius: '10px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div>
+            <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+              Số điện thoại và email
+            </Typography>
+
+            <Grid container alignItems="center" spacing={1}>
+              <Grid item>
+                <FontAwesomeIcon icon={faPhone} />
+              </Grid>
+              <Grid item>
+                <Typography>Số điện thoại: 0976474170</Typography>
+              </Grid>
+            </Grid>
+            <Button variant="outlined" fullWidth disabled sx={{ marginTop: '10px' }}>
+              Cập nhật
+            </Button>
+
+            <Grid container alignItems="center" spacing={1} sx={{ marginTop: '20px' }}>
+              <Grid item>
+                <FontAwesomeIcon icon={faEnvelope} />
+              </Grid>
+              <Grid item>
+                <Typography>Địa chỉ email: dctuong021203@gmail.com</Typography>
+              </Grid>
+            </Grid>
+            <Button variant="outlined" fullWidth disabled sx={{ marginTop: '10px' }}>
+              Cập nhật
+            </Button>
+          </div>
+
+          {/* Social Media Section */}
+          <div>
+            <Typography variant="h6" gutterBottom sx={{ marginTop: '20px', fontWeight: 'bold' }}>
+              Liên kết mạng xã hội
+            </Typography>
+            <Grid container alignItems="center" spacing={1}>
+              <Grid item>
+                <img style={{ width: 20 }} alt="facebook" src={facebook} />
+              </Grid>
+              <Grid item>
+                <Typography>Facebook</Typography>
+              </Grid>
+            </Grid>
+            <Button variant="outlined" fullWidth disabled sx={{ marginTop: '10px' }}>
+              Cập nhật
+            </Button>
+
+            <Grid container alignItems="center" spacing={1} sx={{ marginTop: '20px' }}>
+              <Grid item>
+                <img style={{ width: 20 }} alt="google" src={google} />
+              </Grid>
+              <Grid item>
+                <Typography>Google</Typography>
+              </Grid>
+            </Grid>
+            <Button variant="outlined" fullWidth disabled sx={{ marginTop: '10px' }}>
+              Cập nhật
+            </Button>
+          </div>
+        </Paper>
+      </Grid>
+    </Grid>
+  );
 }
 
 export default Profile;

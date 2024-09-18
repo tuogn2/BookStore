@@ -1,64 +1,68 @@
-import style from '../auth.module.scss'
-import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
-import authSlice from '../authSlice';
 import { useState } from 'react';
-import { URL } from '../../../api/index.js'
 import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Typography, Container, Box, InputAdornment, IconButton, Snackbar, Alert } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import authSlice from '../authSlice';
 import inforuserSlice from '../inforSlice';
+import { URL } from '../../../api/index.js';
 import { regexpass, regexuser } from '~/regex';
 
-const cx = classNames.bind(style);
 function Signin() {
-    const dispath = useDispatch()
-    const [user, setuser] = useState('')
-    const [pass, setpass] = useState('')
-    const [repeap, setrepeap] = useState('')
-    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [user, setUser] = useState('');
+    const [pass, setPass] = useState('');
+    const [repeap, setRepeap] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showRepeapPassword, setShowRepeapPassword] = useState(false);
+    const [notifiUser, setNotifiUser] = useState('');
+    const [notifiPass, setNotifiPass] = useState('');
+    const [notifiRepeap, setNotifiRepeap] = useState('');
+    const [openToast, setOpenToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
 
-    const [notifiuser, setnotifiuser] = useState('')
-    const [notifipass, setnotifipass] = useState('')
-    const [notifirepeap, setnotifirepeap] = useState('')
-    const handlearowlogin = () => {
-        return dispath(authSlice.actions.arowlogin())
-    }
-    const handleuser = (e) => {
-        setuser(e.target.value)
-    }
+    const handleArowLogin = () => {
+        dispatch(authSlice.actions.arowlogin());
+    };
 
-    const handlepass = (e) => {
-        setpass(e.target.value)
-    }
-    const handlerepeap = (e) => {
-        setrepeap(e.target.value)
-    }
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
+    const handleClickShowRepeapPassword = () => {
+        setShowRepeapPassword(!showRepeapPassword);
+    };
 
- 
-  
-    const handleclicksignin = () => {
+    const handleSignin = () => {
         if (regexuser(user) === false) {
-            setnotifiuser('Tên phải lớn hơn 10 kí tự')
+            setNotifiUser('Tên phải lớn hơn 10 kí tự');
+            setToastMessage('Tên phải lớn hơn 10 kí tự');
+            setOpenToast(true);
             return;
         } else {
-            if (user.length > 0) {
-                setnotifiuser('')
-            }
+            setNotifiUser('');
         }
 
         if (regexpass(pass) === false) {
-            setnotifipass('Pass phải lớn hơn 8 kí tự')
-            return
+            setNotifiPass('Pass phải lớn hơn 8 kí tự');
+            setToastMessage('Pass phải lớn hơn 8 kí tự');
+            setOpenToast(true);
+            return;
         } else {
-            if (pass.length > 0) {
-                setnotifipass('')
-            }
+            setNotifiPass('');
         }
+
         if (pass !== repeap) {
-            return setnotifirepeap('No match')
+            setNotifiRepeap('No match');
+            setToastMessage('No match');
+            setOpenToast(true);
+            return;
         } else {
-            setnotifirepeap('')
+            setNotifiRepeap('');
         }
+
         fetch(`${URL}/user/createuser`, {
             method: 'POST',
             credentials: 'include',
@@ -72,59 +76,121 @@ function Signin() {
         })
             .then(res => {
                 if (res.status === 400) {
-                    throw new Error('Đã tạo rồi!!')
+                    throw new Error('Đã tạo rồi!!');
                 }
-                return res.json() 
+                return res.json();
             })
             .then(value => {
-                localStorage.setItem('id', `${value._id}`)
-                dispath(inforuserSlice.actions.login(value))
-                return navigate('/')
+                localStorage.setItem('id', `${value._id}`);
+                dispatch(inforuserSlice.actions.login(value));
+                navigate('/');
             })
             .catch(err => {
                 if (err.message === 'Đã tạo rồi!!') {
-                     setnotifiuser(`${err.message}`)
+                    setNotifiUser(err.message);
+                    setToastMessage(err.message);
+                    setOpenToast(true);
                 }
-            })
+            });
+    };
 
-    }
+    const handleToastClose = () => {
+        setOpenToast(false);
+    };
+
     return (
-        <div className={cx('formlogin')}>
-            <div className={cx('title')}>Sign in </div>
-            <div className={`container ${cx('content')}`}>
+        <Container component="main" maxWidth="xs" sx={{ mt: 8, mb: 4 }}>
+            <Typography variant="h4" align="center" color="primary" gutterBottom>
+                Sign in
+            </Typography>
+            <Typography variant="body1" align="center" color="textSecondary" paragraph>
                 Books ignite minds, broaden horizons. They transport, inspire, enlighten. In their pages,
-                worlds unfold, dreams take flight. Explore, discover, escape, within.                    </div>
-            <div className={cx('input')}>
-                <label htmlFor='usernamelogout' >
-                </label>
-                <input type="text" id="usernamelogout" onChange={handleuser} placeholder="Enter user name" />
-                <p className={cx('notifi')}>{notifiuser}</p>
-
-            </div>
-            <div className={cx('input')}>
-                <label htmlFor='passlogout'>
-                </label>
-                <input type="password" id='passlogout' onChange={handlepass} placeholder="Enter password" />
-                <p className={cx('notifi')}>{notifipass}</p>
-
-            </div>
-            <div className={cx('input')}>
-                <label htmlFor='repeappass'>
-                </label>
-                <input type="password" id='repeappass' onChange={handlerepeap} placeholder="Repeap password" />
-                <p className={cx('notifi')}>{notifirepeap}</p>
-
-            </div>
-
-            <div className={cx('button')}>
-                <div className="btn btn-primary" onClick={handleclicksignin} >
+                worlds unfold, dreams take flight. Explore, discover, escape, within.
+            </Typography>
+            <Box
+                sx={{
+                    p: 4,
+                    borderRadius: 2,
+                    boxShadow: 3,
+                    backgroundColor: 'background.paper'
+                }}
+            >
+                <TextField
+                    variant="outlined"
+                    fullWidth
+                    label="Username"
+                    value={user}
+                    onChange={(e) => setUser(e.target.value)}
+                    error={Boolean(notifiUser)}
+                    helperText={notifiUser}
+                    sx={{ mb: 2 }}
+                />
+                <TextField
+                    variant="outlined"
+                    fullWidth
+                    type={showPassword ? 'text' : 'password'}
+                    label="Password"
+                    value={pass}
+                    onChange={(e) => setPass(e.target.value)}
+                    error={Boolean(notifiPass)}
+                    helperText={notifiPass}
+                    sx={{ mb: 2 }}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton onClick={handleClickShowPassword} edge="end">
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                    }}
+                />
+                <TextField
+                    variant="outlined"
+                    fullWidth
+                    type={showRepeapPassword ? 'text' : 'password'}
+                    label="Repeat Password"
+                    value={repeap}
+                    onChange={(e) => setRepeap(e.target.value)}
+                    error={Boolean(notifiRepeap)}
+                    helperText={notifiRepeap}
+                    sx={{ mb: 2 }}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton onClick={handleClickShowRepeapPassword} edge="end">
+                                    {showRepeapPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                    }}
+                />
+                <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    onClick={handleSignin}
+                >
                     Sign in
-                </div>
-            </div>
-            <div className={cx('more-options')}>
-                <div className={cx('arowlogin')} onClick={handlearowlogin}>Đăng Nhập -></div>
-            </div>
-        </div>);
+                </Button>
+                <Box sx={{ textAlign: 'center', mt: 2 }}>
+                    <Typography variant="body2" color="primary" onClick={handleArowLogin} sx={{ cursor: 'pointer' }}>
+                        Đăng Nhập 
+                    </Typography>
+                </Box>
+            </Box>
+            <Snackbar
+                open={openToast}
+                autoHideDuration={6000}
+                onClose={handleToastClose}
+                message={toastMessage}
+            >
+                <Alert onClose={handleToastClose} severity="error" sx={{ width: '100%' }}>
+                    {toastMessage}
+                </Alert>
+            </Snackbar>
+        </Container>
+    );
 }
 
 export default Signin;

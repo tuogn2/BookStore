@@ -1,26 +1,45 @@
 .wrap-pagination {
-    margin: 10px 0;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.button {
-    margin: 0 4px;
-    border: 1px solid black;
-    padding: 5px 10px;
-    border-radius: 10px;
-    transition: 0.5s ease-out;
-    cursor: pointer;
-    &:hover {
-        background-color: rgb(209, 209, 105);
+    margin: 20px 0;
+    gap: 10px; // Tạo khoảng cách giữa các nút
+  
+    // Các nút phân trang
+    .button {
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: 1px solid #007bff;
+      background-color: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #007bff;
+        color: white;
+      }
+  
+      &.checked {
+        background-color: #007bff;
+        color: white;
+      }
     }
-}
-
-.checked {
-    background-color: #9cc9f0;
-    cursor: default;
-    &:hover {
-        background-color: #9cc9f0;
+  
+    // Responsive for mobile devices
+    @media (max-width: 600px) {
+      .button {
+        padding: 8px 12px;
+        font-size: 12px; // Giảm kích thước chữ trên mobile
+      }
     }
-}
+  
+    // Responsive for larger tablets or small desktops
+    @media (min-width: 601px) and (max-width: 1024px) {
+      .button {
+        padding: 10px 14px;
+        font-size: 13px;
+      }
+    }
+  }
+  

@@ -1,46 +1,46 @@
+import React from "react";
+import { Carousel } from "antd";
+import banner1 from "~/Images/banner.jpeg";
+import banner2 from "~/Images/banner4.png";
+import banner3 from "~/Images/bannerbook.jpeg";
+import "antd/dist/reset.css"; // Import Ant Design CSS
 
-import banner1 from '~/Images/banner.jpeg'
-import banner2 from '~/Images/banner.png'
-import banner3 from '~/Images/bannerbook.jpeg'
+const banners = [banner1, banner2, banner3];
 
 
-import style from './Banner.module.scss'
-import classNames from 'classnames/bind'
-import { memo } from 'react'
-const cx = classNames.bind(style)
+
+
+const contentStyle = {
+  height: "370px",
+  color: "#fff",
+  lineHeight: "160px",
+  textAlign: "center",
+  background: "#364d79",
+};
+
 function Banner() {
+  return (
 
-
-    return (
-        <div className={cx('wrapbanner')}>
-            <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
-            <div className="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <>
+      <Carousel dotPosition="bottom"  draggable arrows autoplay autoplaySpeed={1500} arrowSize={400}>
+        {banners.map((banner, index) => (
+            <div key={index}>
+              <h3 style={contentStyle}>
+                <img
+                  src={banner}
+                  alt={`Banner ${index + 1}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </h3>
             </div>
-            <div className="carousel-inner">
-                <div className="carousel-item active">
-                    <img src={banner1} className="d-block w-100" alt="..."/>
-                </div>
-                <div className="carousel-item">
-                    <img src={banner2} className="d-block w-100" alt="..."/>
-                </div>
-                <div className="carousel-item">
-                    <img src={banner3} className="d-block w-100" alt="..."/>
-                </div>
-            </div>
-            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Previous</span>
-            </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Next</span>
-            </button>
-        </div>
-        </div>
-    );
+        ))}
+      </Carousel>
+    </>
+  );
 }
 
-export default memo(Banner);
+export default Banner;

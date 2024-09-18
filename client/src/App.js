@@ -52,9 +52,9 @@ function App() {
           </ProfileLayout>} />
 
         <Route path='/account' element={
-          <DefaulLayout>
+        
             <Auth />
-          </DefaulLayout>} />
+          } />
         <Route path='/' element={
           <DefaulLayout>
             <Home />
