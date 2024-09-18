@@ -75,6 +75,48 @@ class usercontroller {
                 return res.status(400).json(err)
             })
     }
+    async handleGoogleLogin(req, res, next) {
+        const { email } = req.body; // Assuming email is sent in the request body
+    
+        try {
+            // Find user by email and check if they are a Google user
+            let user = await users.findOne({ name: email, authtype: 'google' });
+    
+            if (user) {
+                // User exists and is a Google user
+                res.cookie('user', email, {
+                    signed: true,
+                    sameSite: 'none',
+                    httpOnly: false,
+                    secure: true
+                });
+                const { password, ...userInfo } = user._doc;
+                return res.status(200).json(userInfo);
+            } else {
+                // User does not exist, create a new one
+                const newUser = new users({
+                    name: email,
+                    password: 'google-login', // Placeholder for password
+                    authtype: 'google'
+                });
+    
+                await newUser.save();
+                res.cookie('user', email, {
+                    signed: true,
+                    sameSite: 'none',
+                    httpOnly: false,
+                    secure: true
+                });
+    
+                const { password, ...userInfo } = newUser._doc;
+                return res.status(201).json(userInfo);
+            }
+        } catch (err) {
+            console.error("Error handling Google login:", err);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+    
 }
 
 module.exports = new usercontroller;

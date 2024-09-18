@@ -7,6 +7,7 @@ const route = express.Router()
 route.post('/createuser',usercontroller.adduser)
 route.post('/login',usercontroller.loginuser)
 route.get('/user/:id',usercontroller.getuser)
+route.post('/google-login', usercontroller.handleGoogleLogin);
 route.get('/',usercontroller.getusers)
 
 
